@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:background="@color/black"
+    android:layout_height="match_parent"
+    tools:context=".CreateNote">
+
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="116dp"
+            android:layout_marginTop="56dp"
+            android:text="My MindLink"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tvScratch"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Scratch Pad"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toTopOf="@+id/pad"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.079"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ibNote"
+        app:layout_constraintVertical_bias="0.916" />
+
+    <EditText
+            android:id="@+id/pad"
+            android:layout_width="370dp"
+            android:layout_height="150dp"
+            android:layout_marginBottom="24dp"
+            android:background="#26251c"
+            android:hint="Start writing..."
+            android:paddingStart="15dp"
+            android:paddingBottom="100dp"
+            android:textColorHint="@color/white"
+            android:textSize="17sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/tvScratch" />
+
+        <SearchView
+            android:id="@+id/scrollView"
+            android:layout_width="370dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:queryHint="Search Here"
+            android:layout_marginTop="50dp"
+            android:background="@drawable/search_back"
+            android:paddingStart="320dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/name" />
+
+    <ImageButton
+        android:id="@+id/ibNote"
+        android:layout_width="210dp"
+        android:layout_height="165dp"
+        android:layout_marginTop="65dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:scaleType="fitXY"
+        android:src="@drawable/new_note"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+
+    <ImageButton
+        android:id="@+id/ibTask"
+        android:layout_width="210dp"
+        android:layout_height="165dp"
+        android:layout_marginTop="65dp"
+        android:background="?selectableItemBackgroundBorderless"
+        android:scaleType="fitXY"
+        android:src="@drawable/new_task"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+
+<!--</androidx.constraintlayout.widget.ConstraintLayout>-->

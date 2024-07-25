@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/createNote"
+        android:title="Create Note"
+        android:icon="@drawable/icon_create"
+
+
+        />
+
+    <item android:id="@+id/notes"
+        android:title="Notes"
+        android:icon="@drawable/icon_notes"
+
+
+        />
+
+    <item android:id="@+id/task"
+        android:title="Task"
+        android:icon="@drawable/icon_calendar"
+
+
+        />
+
+
+</menu>
