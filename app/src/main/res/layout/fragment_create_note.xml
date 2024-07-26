@@ -50,7 +50,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="@+id/tvScratch" />
 
-        <SearchView
+        <androidx.appcompat.widget.SearchView
             android:id="@+id/scrollView"
             android:layout_width="370dp"
             android:layout_height="wrap_content"

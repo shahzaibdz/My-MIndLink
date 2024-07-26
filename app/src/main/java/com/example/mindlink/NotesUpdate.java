@@ -21,7 +21,7 @@ import androidx.core.view.WindowInsetsCompat;
 import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
 
-public class NotesSave extends AppCompatActivity {
+public class NotesUpdate extends AppCompatActivity {
     MaterialToolbar materialToolbar;
     EditText title,writing;
     Button btnSave;
@@ -41,6 +41,8 @@ public class NotesSave extends AppCompatActivity {
             public void onClick(View v) {
                 finish();
             }
+
+
         });
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,11 +52,11 @@ public class NotesSave extends AppCompatActivity {
 
 
                 Note note = new Note(dbTitle,dbWriting,"25/04/2023",2);
-               if (db.insertNote(note)){
-                   Toast.makeText(NotesSave.this, "Note Save", Toast.LENGTH_SHORT).show();
-               }else {
-                   Toast.makeText(NotesSave.this, "Note Not Save", Toast.LENGTH_SHORT).show();
-               }
+                if (db.updateNote(note)){
+                    Toast.makeText(NotesUpdate.this, "Note Update", Toast.LENGTH_SHORT).show();
+                }else {
+                    Toast.makeText(NotesUpdate.this, "Note Not Update", Toast.LENGTH_SHORT).show();
+                }
                 finish();
             }
         });
@@ -65,8 +67,8 @@ public class NotesSave extends AppCompatActivity {
     public void boldText(View view){
         SpannableString spannableString = new SpannableString(writing.getText().toString());
         spannableString.setSpan(new StyleSpan(Typeface.BOLD),
-        writing.getSelectionStart(),
-        writing.getSelectionEnd(),0);
+                writing.getSelectionStart(),
+                writing.getSelectionEnd(),0);
         writing.setText(spannableString);
     }
     public void italic(View view){

@@ -16,6 +16,15 @@ public class NoteAdaptor extends RecyclerView.Adapter<NoteAdaptor.NoteViewHolder
     public NoteAdaptor(List<Note> notes) {
         this.notes = notes;
     }
+    //222222222222222
+    private OnItemClickListener onItemClickListener;
+    private OnItemLongClickListener onItemLongClickListener;
+    public void setOnItemClickListener(OnItemClickListener onItemClickListener){
+        this.onItemClickListener = onItemClickListener;
+    }
+    public void setOnItemLongClickListener(OnItemLongClickListener onItemLongClickListener){
+        this.onItemLongClickListener = onItemLongClickListener;
+    }
     @NonNull
     @Override
     public NoteAdaptor.NoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -42,6 +51,38 @@ public class NoteAdaptor extends RecyclerView.Adapter<NoteAdaptor.NoteViewHolder
             title = itemView.findViewById(R.id.rv_title);
             description = itemView.findViewById(R.id.rv_description);
             time = itemView.findViewById(R.id.rv_time);
+            //33333333333333
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onItemClickListener != null){
+                        int position = getAdapterPosition();
+                        onItemClickListener.onItemClick(position);
+                    }
+                }
+            });
+
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (onItemLongClickListener != null){
+                        int positionLong = getAdapterPosition();
+                        onItemLongClickListener.onItemLongClick(positionLong);
+                    }
+                    return false;
+                }
+            });
+
+
         }
+    }
+  //111111
+    interface OnItemClickListener {
+
+        void onItemClick(int position);
+    }
+
+    interface OnItemLongClickListener {
+        void onItemLongClick(int positionLong);
     }
 }

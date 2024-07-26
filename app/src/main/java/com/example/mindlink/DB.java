@@ -13,7 +13,7 @@ import java.util.List;
 
 public class DB extends SQLiteOpenHelper {
     private static DB instance;
-    private static final String DB_NAME = "mindlink.db";
+    private static final String DB_NAME = "MINDLINK";
     private static final int DB_VERSION = 1;
 
     private DB(Context context){
@@ -81,7 +81,21 @@ public class DB extends SQLiteOpenHelper {
     public List<Note> fetchNotes(){
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery(Note.SELECT_ALL_NOTES,null);
-        List<Note> notes = new ArrayList<>();
+        List<Note> notes = new ArrayList<>(cursor.getCount());
+        if(cursor.moveToFirst()){
+            do {
+                Note note = new Note();
+                int index = cursor.getColumnIndex(Note.COL_TITLE);
+                note.setTitle(cursor.getString(index));
+                index = cursor.getColumnIndex(Note.COL_DESCRIPTION);
+                note.setDescription(cursor.getString(index));
+                index = cursor.getColumnIndex(Note.COL_TIME);
+                note.setTime(cursor.getString(index));
+                index = cursor.getColumnIndex(Note.COL_ID);
+                note.setId(cursor.getInt(index));
+                notes.add(note);
+            }while (cursor.moveToFirst());
+        }
         return notes;
     }
 
