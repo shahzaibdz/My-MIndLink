@@ -45,7 +45,7 @@ public class TaskAdaptor extends RecyclerView.Adapter<TaskAdaptor.TaskViewHolder
         TextView taskTitle;
         public TaskViewHolder(@NonNull View itemView) {
             super(itemView);
-            taskTitle = itemView.findViewById(R.id.rv_task);
+            taskTitle = itemView.findViewById(R.id.tvTask_rv);
             itemView.setOnLongClickListener(new View.OnLongClickListener() {
                 @Override
                 public boolean onLongClick(View v) {

@@ -26,15 +26,16 @@ public class NotesFragment extends Fragment {
       RecyclerView rvNotes;
       List<Note>notesList;
       NoteAdaptor noteAdaptor;
-    DB db = DB.getInstance(getContext());
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         view =  inflater.inflate(R.layout.fragment_notes, container, false);
         noteSend = view.findViewById(R.id.noteSend);
         rvNotes = view.findViewById(R.id.rvNotes);
-
+        DB db = DB.getInstance(getContext());
         notesList = db.fetchNotes();
 //        notesList = generateNotes();
         noteAdaptor = new NoteAdaptor(notesList);

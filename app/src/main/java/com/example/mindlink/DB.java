@@ -84,26 +84,42 @@ public class DB extends SQLiteOpenHelper {
     }
 
     public List<Note> fetchNotes(){
-        SQLiteDatabase db = getReadableDatabase();
-        Log.d(" Flutter", db.getPath());
-        Cursor cursor = db.rawQuery(Note.SELECT_ALL_NOTES,null);
-        List<Note> notes = new ArrayList<>(cursor.getCount());
-        if(cursor.moveToFirst()){
-            do {
-                Note note = new Note();
-                int index = cursor.getColumnIndex(Note.COL_TITLE);
-                note.setTitle(cursor.getString(index));
-                index = cursor.getColumnIndex(Note.COL_DESCRIPTION);
-                note.setDescription(cursor.getString(index));
-                index = cursor.getColumnIndex(Note.COL_TIME);
-                note.setTime(cursor.getString(index));
-                index = cursor.getColumnIndex(Note.COL_ID);
-                note.setId(cursor.getInt(index));
-                notes.add(note);
-            }while (cursor.moveToNext());
+        try {
+            SQLiteDatabase db = getReadableDatabase();
+            Log.d(" Flutter", db.getPath());
+            Cursor cursor = db.rawQuery(Note.SELECT_ALL_NOTES,null);
+            List<Note> notes = new ArrayList<>(cursor.getCount());
+            if(cursor.moveToFirst()){
+                do {
+                    Note note = new Note();
+                    int index = cursor.getColumnIndex(Note.COL_TITLE);
+                    note.setTitle(cursor.getString(index));
+                    index = cursor.getColumnIndex(Note.COL_DESCRIPTION);
+                    note.setDescription(cursor.getString(index));
+                    index = cursor.getColumnIndex(Note.COL_TIME);
+                    note.setTime(cursor.getString(index));
+                    index = cursor.getColumnIndex(Note.COL_ID);
+                    note.setId(cursor.getInt(index));
+                    notes.add(note);
+                }while (cursor.moveToNext());
+            }
+            cursor.close();
+            return notes;
+        }catch(Exception ex){
+            Log.d("FETCH NOTE EXCEPTION", "fetchNotes: " + ex.toString());
+            ArrayList<Note> noteList = new ArrayList<Note>();
+            noteList.add(new Note("One Note","One Description","00:00 am",1));
+            noteList.add(new Note("Two Note","Two Description","00:00 am",2));
+            noteList.add(new Note("Three Note","Three Description","00:00 am",3));
+            noteList.add(new Note("Four Note","Four Description","00:00 am",4));
+            noteList.add(new Note("Five Note","Five Description","00:00 am",5));
+            noteList.add(new Note("Six Note","Six Description","00:00 am",6));
+            noteList.add(new Note("Seven Note","Seven Description","00:00 am",7));
+            noteList.add(new Note("Eight Note","Eight Description","00:00 am",8));
+            return noteList;
+
+
         }
-        cursor.close();
-        return notes;
     }
 
     public boolean insertTask(Task task){
@@ -137,7 +153,7 @@ public class DB extends SQLiteOpenHelper {
            cursor.close();
            return tasks;
        }catch(Exception ex){
-           List<Task> db = new ArrayList<>();
+           ArrayList<Task> db = new ArrayList<>();
            db.add(new Task("Task 1",1));
            db.add(new Task("Task 2",2));
            db.add(new Task("Task 3",3));
@@ -153,10 +169,11 @@ public class DB extends SQLiteOpenHelper {
         long rowId;
         try {
             rowId = db.delete(Task.TABLE_NAME,Task.COL_ID+" = ?",new String[task.getTaskId()]);
+            return rowId != -1;
         }catch (Exception ex){
             return false;
         }
-        return rowId != -1;
+
     }
 
 }
