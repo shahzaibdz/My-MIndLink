@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="240dp"
+    android:background="@drawable/dig_background"
+    android:orientation="vertical">
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Things to do"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_marginStart="30dp"
+        android:textSize="12sp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp"
+        >
+
+    <EditText
+        android:id="@+id/etTask"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Enter task"
+        android:textSize="20sp"
+        android:layout_marginTop="10dp"
+        android:background="#948C8C"
+        android:textColorHint="@color/white"
+        android:drawableStart="@drawable/baseline_settings"
+        android:drawablePadding="20dp"
+        android:layout_marginStart="25dp"
+        />
+
+        <TextView
+            android:id="@+id/tvSaveTask"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="5dp"
+            android:drawableEnd="@drawable/baseline_restore_from_trash_24"
+
+            />
+
+    </LinearLayout>
+
+
+
+</LinearLayout>

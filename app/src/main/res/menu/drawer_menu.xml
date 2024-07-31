@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/accessibility"
+        android:title="Widjets"
+        android:icon="@drawable/baseline_accessibility"
+        android:visible="true"
+        />
+    <item android:id="@+id/trash"
+        android:title="Trash"
+        android:icon="@drawable/baseline_restore_from_trash_24"
+        android:visible="true"
+
+        />
+    <item android:id="@+id/setting"
+        android:title="setting"
+        android:icon="@drawable/baseline_settings"
+        android:visible="true"
+
+        />
+    <item android:id="@+id/help"
+        android:title="Help"
+        android:icon="@drawable/baseline_question"
+        android:visible="true"
+
+        />
+
+</menu>

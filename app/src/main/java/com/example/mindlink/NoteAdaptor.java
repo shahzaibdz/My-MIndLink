@@ -8,9 +8,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
-public class NoteAdaptor extends RecyclerView.Adapter<NoteAdaptor.NoteViewHolder>    {
+ public class NoteAdaptor extends RecyclerView.Adapter<NoteAdaptor.NoteViewHolder>    {
 
     private List<Note> notes;
     public NoteAdaptor(List<Note> notes) {
@@ -38,6 +42,11 @@ public class NoteAdaptor extends RecyclerView.Adapter<NoteAdaptor.NoteViewHolder
      holder.title.setText(note.getTitle());
      holder.description.setText(note.getDescription());
      holder.time.setText(note.getTime());
+
+        DateFormat date = new SimpleDateFormat("HH:mm , dd/MM/yyyy", Locale.getDefault());
+        String currentDateAndTime = date.format(new Date());
+        holder.time.setText(currentDateAndTime);
+
     }
 
     @Override
@@ -62,14 +71,10 @@ public class NoteAdaptor extends RecyclerView.Adapter<NoteAdaptor.NoteViewHolder
                 }
             });
 
-            itemView.setOnLongClickListener(new View.OnLongClickListener() {
-                @Override
-                public boolean onLongClick(View v) {
-                    if (onItemLongClickListener != null){
-                        int positionLong = getAdapterPosition();
-                        onItemLongClickListener.onItemLongClick(positionLong);
-                    }
-                    return false;
+            itemView.setOnClickListener(v -> {
+                if (onItemLongClickListener != null){
+                    int positionLong = getAdapterPosition();
+                    onItemLongClickListener.onItemLongClick(positionLong);
                 }
             });
 

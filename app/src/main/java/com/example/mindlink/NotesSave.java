@@ -49,7 +49,8 @@ public class NotesSave extends AppCompatActivity {
                 String dbWriting = writing.getText().toString();
 
 
-                Note note = new Note(dbTitle,dbWriting,"25/04/2023",2);
+
+                Note note = new Note(dbTitle,dbWriting,"25/04/2023",1);
                if (db.insertNote(note)){
                    Toast.makeText(NotesSave.this, "Note Save", Toast.LENGTH_SHORT).show();
                }else {

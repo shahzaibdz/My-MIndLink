@@ -12,6 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -21,12 +23,15 @@ public class MainActivity extends AppCompatActivity {
 
     FrameLayout frame;
     BottomNavigationView navigationBar;
+    FragmentManager fragmentManager;
     @SuppressLint("MissingInflatedId")
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
         navigationBar = findViewById(R.id.navigationBar);
+        fragmentManager = getSupportFragmentManager();
+
         changeFragment(new CreateNote());
 //        getSupportFragmentManager().beginTransaction().add(R.id.frame,new CreateNote()).commit();
         navigationBar.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
@@ -53,4 +58,5 @@ public class MainActivity extends AppCompatActivity {
     void changeFragment(Fragment fragment){
         getSupportFragmentManager().beginTransaction().replace(R.id.frame,fragment).commit();
     }
+
 }

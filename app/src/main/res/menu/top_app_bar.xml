@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <item android:id="@+id/history"
         android:title="@string/app_name"
-        android:icon="@drawable/dot_icon"
         android:visible="true"
+        />
+
+    <group
+        android:id="@+id/share"
+        android:title="Setting"
+        android:visible="true"
+        android:icon="@drawable/icon_notes"
         />
 
 </menu>

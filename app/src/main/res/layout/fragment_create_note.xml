@@ -8,81 +8,39 @@
     android:layout_height="match_parent"
     tools:context=".CreateNote">
 
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="116dp"
-            android:layout_marginTop="56dp"
-            android:text="My MindLink"
-            android:textColor="@color/white"
-            android:textSize="30sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:openDrawer="start"
+        android:fitsSystemWindows="true">
 
-    <TextView
-        android:id="@+id/tvScratch"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Scratch Pad"
-        android:textColor="@color/white"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/pad"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.079"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ibNote"
-        app:layout_constraintVertical_bias="0.916" />
+        <include layout="@layout/create_note_content" />
 
-    <EditText
-            android:id="@+id/pad"
-            android:layout_width="370dp"
-            android:layout_height="150dp"
-            android:layout_marginBottom="24dp"
-            android:background="#26251c"
-            android:hint="Start writing..."
-            android:paddingStart="15dp"
-            android:paddingBottom="100dp"
-            android:textColorHint="@color/white"
-            android:textSize="17sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/tvScratch" />
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigationDrawer"
+            android:layout_width="250dp"
+            android:layout_height="330dp"
+            app:menu="@menu/drawer_menu"
+            app:dividerInsetStart="60dp"
+            app:itemIconPadding="20dp"
+            app:headerLayout="@layout/drawer_header"
+            android:layout_gravity="start"
+            android:layout_marginStart="100dp"
+            android:background="@color/black"
+            app:itemIconTint="@color/white"
+            app:itemTextColor="@color/white"
+            android:layout_marginTop="60dp"
+            app:drawerLayoutCornerSize="20dp"
 
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/scrollView"
-            android:layout_width="370dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:queryHint="Search Here"
-            android:layout_marginTop="50dp"
-            android:background="@drawable/search_back"
-            android:paddingStart="320dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/name" />
+            />
 
-    <ImageButton
-        android:id="@+id/ibNote"
-        android:layout_width="210dp"
-        android:layout_height="165dp"
-        android:layout_marginTop="65dp"
-        android:background="?selectableItemBackgroundBorderless"
-        android:scaleType="fitXY"
-        android:src="@drawable/new_note"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
-
-    <ImageButton
-        android:id="@+id/ibTask"
-        android:layout_width="210dp"
-        android:layout_height="165dp"
-        android:layout_marginTop="65dp"
-        android:background="?selectableItemBackgroundBorderless"
-        android:scaleType="fitXY"
-        android:src="@drawable/new_task"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+        <FrameLayout
+            android:id="@+id/frameLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
