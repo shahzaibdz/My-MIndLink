@@ -1,5 +1,7 @@
 package com.example.mindlink;
 
+import static java.security.AccessController.getContext;
+
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -38,12 +40,12 @@ public class NotesFragment extends Fragment {
         DB db = DB.getInstance(getContext());
         notesList = db.fetchNotes();
 //        notesList = generateNotes();
-        noteAdaptor = new NoteAdaptor(notesList);
 //        List<Note> notesList = generateNotes();
+        noteAdaptor = new NoteAdaptor(notesList);
         rvNotes.setLayoutManager(new LinearLayoutManager(getContext()));
         rvNotes.setAdapter(noteAdaptor);
         rvNotes.setHasFixedSize(true);
-        Toast.makeText(getContext(), "Your Notes"+notesList.size(), Toast.LENGTH_SHORT).show();
+//        Toast.makeText(getContext(), "Your Notes"+notesList.size(), Toast.LENGTH_SHORT).show();
 
 
 //        try {
@@ -67,60 +69,80 @@ public class NotesFragment extends Fragment {
        noteAdaptor.setOnItemClickListener(new NoteAdaptor.OnItemClickListener() {
            @Override
            public void onItemClick(int position) {
-               Intent intent = new Intent(getContext(),NotesUpdate.class);
+               List<Note> notes = db.fetchNotes();
+               Intent intent = new Intent(getContext() , NotesUpdate.class);
+               intent.putExtra("Position", position);
+               intent.putExtra("Title", notes.get(position).getTitle());
+               intent.putExtra("Description", notes.get(position).getDescription());
+               intent.putExtra("Time", notes.get(position).getTime());
                startActivity(intent);
            }
        });
 
+        noteAdaptor.setOnItemLongClickListener(new NoteAdaptor.OnItemLongClickListener() {
+            @Override
+            public void onItemLongClick(int positionLong) {
+                new AlertDialog.Builder(getContext())
+                        .setMessage("Do you want to delete this note?")
+                        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 
-       noteAdaptor.setOnItemLongClickListener(new NoteAdaptor.OnItemLongClickListener() {
-           @Override
-           public void onItemLongClick(int positionLong) {
-               new AlertDialog.Builder(getContext())
-                       .setMessage("Do You Want To Delete This Note")
-                       .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                           @Override
-                           public void onClick(DialogInterface dialog, int which) {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                int id = notesList.get(positionLong).getId();
 
-                               String dbTitle = notesList.get(positionLong).getTitle();
-                               String dbWriting = notesList.get(positionLong).getDescription();
+                                Note note = new Note(
+                                        notesList.get(positionLong).getTitle(),
+                                        notesList.get(positionLong).getDescription(),
+                                        notesList.get(positionLong).getTime(),
+                                        id
+                                );
 
+                                if (db.deleteNote(note)) {
+                                    // Remove the note from the list and notify the adapter
+                                    notesList.remove(positionLong);
+                                    noteAdaptor.notifyItemRemoved(positionLong);
 
+                                    Toast.makeText(getContext(), "Note Deleted", Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(getContext(), "Note Not Deleted", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+                        })
+                        .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                            }
+                        })
+                        .create()
+                        .show();
+            }
+        });
 
-                               Note note = new Note(dbTitle,dbWriting,"25/04/2023",2);
-                               if (db.deleteNote(note)){
-                                   Toast.makeText(getContext(), "Note Save", Toast.LENGTH_SHORT).show();
-                               }else {
-                                   Toast.makeText(getContext(), "Note Not Save", Toast.LENGTH_SHORT).show();
-                               }
-                           }
-                       })
-                       .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                           @Override
-                           public void onClick(DialogInterface dialog, int which) {
-
-                           }
-                       })
-                       .create()
-                       .show();
-           }
-       });
-
-
-       return view;
+        return view;
     }
 
-    public List<Note> generateNotes(){
-        List<Note> notes= new ArrayList<>();
-        notes.add(new Note("Title","Description","25/04/2023",2));
-        notes.add(new Note("Title","Description","25/04/2023",3));
-        notes.add(new Note("Title","Description","25/04/2023",4));
-        notes.add(new Note("Title","Description","25/04/2023",5));
-        return notes;
-    }
+
 
     @Override
     public void onResume() {
         super.onResume();
+        DB db = DB.getInstance(getContext());
+        notesList.clear(); // Clear the old list
+        notesList.addAll(db.fetchNotes()); // Add the updated notes
+        noteAdaptor.notifyDataSetChanged(); // Notify the adapter to refresh the RecyclerView
     }
 }
+
+//    public List<Note> generateNotes(){
+//        List<Note> notes= new ArrayList<>();
+//        notes.add(new Note("Title","Description","25/04/2023",2));
+//        notes.add(new Note("Title","Description","25/04/2023",3));
+//        notes.add(new Note("Title","Description","25/04/2023",4));
+//        notes.add(new Note("Title","Description","25/04/2023",5));
+//        return notes;
+
+
+
+
+

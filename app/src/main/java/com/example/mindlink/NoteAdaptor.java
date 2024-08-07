@@ -23,6 +23,9 @@ import java.util.Locale;
     //222222222222222
     private OnItemClickListener onItemClickListener;
     private OnItemLongClickListener onItemLongClickListener;
+
+
+
     public void setOnItemClickListener(OnItemClickListener onItemClickListener){
         this.onItemClickListener = onItemClickListener;
     }
@@ -43,9 +46,6 @@ import java.util.Locale;
      holder.description.setText(note.getDescription());
      holder.time.setText(note.getTime());
 
-        DateFormat date = new SimpleDateFormat("HH:mm , dd/MM/yyyy", Locale.getDefault());
-        String currentDateAndTime = date.format(new Date());
-        holder.time.setText(currentDateAndTime);
 
     }
 
@@ -64,20 +64,23 @@ import java.util.Locale;
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (onItemClickListener != null){
+                    if (onItemClickListener != null) {
                         int position = getAdapterPosition();
                         onItemClickListener.onItemClick(position);
                     }
                 }
             });
 
-            itemView.setOnClickListener(v -> {
-                if (onItemLongClickListener != null){
-                    int positionLong = getAdapterPosition();
-                    onItemLongClickListener.onItemLongClick(positionLong);
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    if (onItemLongClickListener != null) {
+                        int positionLong = getAdapterPosition();
+                        onItemLongClickListener.onItemLongClick(positionLong);
+                    }
+                    return false;
                 }
             });
-
 
         }
     }

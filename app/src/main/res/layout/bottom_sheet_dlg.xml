@@ -2,52 +2,78 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="240dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/dig_background"
     android:orientation="vertical">
-
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Things to do"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        android:layout_marginStart="30dp"
-        android:textSize="12sp"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="30dp"
         >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Things to do"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:textColor="@color/white"
+            android:fontFamily="casual"
+            android:layout_marginStart="30dp"
+            android:textSize="16sp"/>
+        <TextView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="12dp"
+            android:drawableEnd="@drawable/baseline_keyboard_arrow_down_24"
+            android:layout_marginStart="5dp"
+            android:drawableTint="@color/white"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp"
+        >
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/icon_circle"
+            app:tint="#b77cfd" />
 
     <EditText
         android:id="@+id/etTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:hint="Enter task"
-        android:textSize="20sp"
-        android:layout_marginTop="10dp"
-        android:background="#948C8C"
+        android:textSize="17sp"
+        android:fontFamily="serif"
+        android:layout_marginTop="3dp"
+        android:background="#262626"
         android:textColorHint="@color/white"
-        android:drawableStart="@drawable/baseline_settings"
         android:drawablePadding="20dp"
-        android:layout_marginStart="25dp"
+        android:layout_marginStart="8dp"
         />
 
-        <TextView
-            android:id="@+id/tvSaveTask"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="150dp"
-            android:layout_marginTop="5dp"
-            android:drawableEnd="@drawable/baseline_restore_from_trash_24"
-
-            />
 
     </LinearLayout>
 
+    <TextView
+        android:id="@+id/tvSaveTask"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="330dp"
+        android:layout_marginTop="50dp"
+        android:drawableEnd="@drawable/baseline_arrow_forward_24"
+        android:drawableTint="#7A7979"
 
+        />
 
 </LinearLayout>

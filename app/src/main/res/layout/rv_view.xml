@@ -7,11 +7,11 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="155dp"
         android:layout_marginTop="16dp"
-        android:background="@color/white"
-        android:elevation="10dp"
-        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="#1a1a1a"
+        android:elevation="30dp"
+        app:cardCornerRadius="8dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -20,8 +20,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingStart="10dp"
+            android:textColor="@color/white"
             android:text="Title"
-            android:textSize="30sp"
+            android:fontFamily="serif"
+            android:textSize="29sp"
             android:textStyle="bold" />
 
         <TextView
@@ -29,18 +31,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
+            android:textColor="@color/white"
+            android:lines="2"
             android:paddingStart="10dp"
             android:text="Description"
-            android:textSize="20sp" />
+            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/rv_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="110dp"
+            android:layout_marginTop="120dp"
+            android:textColor="@color/white"
             android:paddingStart="10dp"
+            android:fontFamily="serif"
             android:text="Time"
-            android:textSize="20sp" />
+            android:textSize="16sp" />
 
     </androidx.cardview.widget.CardView>
 

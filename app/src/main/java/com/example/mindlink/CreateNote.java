@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.os.Handler;
+import android.os.Looper;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,12 +23,18 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ImageButton;
 import android.widget.SearchView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.material.navigation.NavigationView;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+
 
 public class CreateNote extends Fragment {
     ImageButton ibNote, ibTask , btnDrawer;
@@ -35,6 +43,9 @@ public class CreateNote extends Fragment {
     DrawerLayout drawerLayout;
     FrameLayout frameLayout;
     NavigationView navigationDrawer;
+    private TextView timePicker;
+
+    private Handler handler = new Handler(Looper.getMainLooper());
     @SuppressLint("WrongViewCast")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -47,8 +58,11 @@ public class CreateNote extends Fragment {
         btnDrawer = view.findViewById(R.id.btnDrawer);
         searchView = view.findViewById(R.id.searchView);
         drawerLayout = view.findViewById(R.id.drawerLayout);
+        timePicker = view.findViewById(R.id.time_picker);
         navigationDrawer = view.findViewById(R.id.navigationDrawer);
         frameLayout = view.findViewById(R.id.frameLayout);
+
+        updateTime();
 
         ibNote.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,10 +76,12 @@ public class CreateNote extends Fragment {
         ibTask.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getContext(),NotesSave.class);
+                Intent intent = new Intent(getContext(), NotesSave.class);
                 startActivity(intent);
             }
         });
+
+
 
         btnDrawer.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -120,6 +136,22 @@ public class CreateNote extends Fragment {
         transaction.replace(R.id.frameLayout,fragment);
         transaction.commit();
 
+    }
+    private void updateTime() {
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                // Get the current time and format it
+                SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm, dd/MM/yyyy", Locale.getDefault());
+                String currentDateAndTime = dateFormat.format(new Date());
+
+                // Update the TextView with the formatted time
+                timePicker.setText(currentDateAndTime);
+
+                // Repeat this the process every second
+                handler.postDelayed(this, 1000);
+            }
+        }, 0);
     }
 
 }

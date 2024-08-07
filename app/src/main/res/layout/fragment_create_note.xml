@@ -30,7 +30,7 @@
             android:background="@color/black"
             app:itemIconTint="@color/white"
             app:itemTextColor="@color/white"
-            android:layout_marginTop="60dp"
+            android:layout_marginTop="50dp"
             app:drawerLayoutCornerSize="20dp"
 
             />

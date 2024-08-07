@@ -15,7 +15,7 @@ import java.util.List;
 public class DB extends SQLiteOpenHelper {
     private static DB instance;
     private static final String DB_NAME = "MINDLINK";
-    private static final int DB_VERSION = 2;
+    private static final int DB_VERSION = 3;
 
     private DB(Context context){
         super(context,DB_NAME,null,DB_VERSION);
@@ -57,26 +57,36 @@ public class DB extends SQLiteOpenHelper {
         return rowId!= -1;
     }
 
-    public boolean updateNote(Note note){
+
+    public boolean updateNote(Note note) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues contentValues = new ContentValues();
-        contentValues.put(Note.COL_TITLE,note.getTitle());
-        contentValues.put(Note.COL_DESCRIPTION,note.getDescription());
-        contentValues.put(Note.COL_TIME,note.getTime());
-        long rowId;
+        contentValues.put(Note.COL_TITLE, note.getTitle());
+        contentValues.put(Note.COL_DESCRIPTION, note.getDescription());
+        contentValues.put(Note.COL_TIME, note.getTime());
+        contentValues.put(Note.COL_ID, note.getId());
+
+        long rowId = -1;
         try {
-            rowId = db.update(Note.TABLE_NAME,contentValues,Note.COL_ID+" = ?",new String[note.getId()]);
-        }catch (Exception ex){
+            Log.d("Note Id in Update Note Method", "updateNote: " + note.getId());
+            rowId = db.update(Note.TABLE_NAME, contentValues, Note.COL_ID + "=?", new String[]{String.valueOf(note.getId())});
+            Log.d("Row ID", "updateNote:  " + rowId);
+        } catch (Exception ex) {
+            Log.e("Update Error", "updateNote: ", ex);
             return false;
         }
-        return rowId != -1;
+
+        return rowId > -1;
     }
+
+
+
     public boolean deleteNote(Note note){
         SQLiteDatabase db = getWritableDatabase();
 
         long rowId;
         try {
-            rowId = db.delete(Note.TABLE_NAME,Note.COL_ID+" = ?",new String[note.getId()]);
+            rowId = db.delete(Note.TABLE_NAME,Note.COL_ID+"=?",new String[]{String.valueOf(note.getId())});
         }catch (Exception ex){
             return false;
         }
@@ -168,9 +178,10 @@ public class DB extends SQLiteOpenHelper {
 
         long rowId;
         try {
-            rowId = db.delete(Task.TABLE_NAME,Task.COL_ID+" = ?",new String[task.getTaskId()]);
+            rowId = db.delete(Task.TABLE_NAME,Task.COL_ID+" = ?",new String[]{String.valueOf(task.getTaskId())});
             return rowId != -1;
         }catch (Exception ex){
+            ex.printStackTrace();
             return false;
         }
 

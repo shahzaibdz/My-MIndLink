@@ -12,14 +12,14 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 
 public class NotesSave extends AppCompatActivity {
     MaterialToolbar materialToolbar;
@@ -32,8 +32,8 @@ public class NotesSave extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_notes_save);
         materialToolbar = findViewById(R.id.icon);
-        title = findViewById(R.id.title);
-        writing = findViewById(R.id.writing);
+        title = findViewById(R.id.update_title);
+        writing = findViewById(R.id.update_writing);
         btnSave = findViewById(R.id.btnSave);
 
         materialToolbar.setOnClickListener(new View.OnClickListener() {
@@ -49,8 +49,11 @@ public class NotesSave extends AppCompatActivity {
                 String dbWriting = writing.getText().toString();
 
 
+                DateFormat date = new SimpleDateFormat("HH:mm , dd/MM/yyyy", Locale.getDefault());
+                String currentDateAndTime = date.format(new Date());
 
-                Note note = new Note(dbTitle,dbWriting,"25/04/2023",1);
+
+                Note note = new Note(dbTitle,dbWriting,currentDateAndTime,1);
                if (db.insertNote(note)){
                    Toast.makeText(NotesSave.this, "Note Save", Toast.LENGTH_SHORT).show();
                }else {

@@ -23,6 +23,7 @@ public class TaskAdaptor extends RecyclerView.Adapter<TaskAdaptor.TaskViewHolder
         OnItemLongClickListener = onItemLongClickListener;
     }
 
+
     @NonNull
     @Override
     public TaskViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

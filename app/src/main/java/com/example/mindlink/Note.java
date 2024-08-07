@@ -6,7 +6,7 @@ public class Note {
     public String title;
     public String description;
     public String time;
-    public int id = 0;
+    public int id = 1;
 
     public static final String TABLE_NAME = "MindLink";
     public static final String COL_TITLE = "Title";

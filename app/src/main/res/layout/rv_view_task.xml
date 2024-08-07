@@ -3,19 +3,43 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:background="@color/black">
 
-    <TextView
-        android:id="@+id/tvTask_rv"
-        android:layout_width="wrap_content"
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="52dp"
-        android:text="Your Task "
-        android:textColor="@color/white"
-        android:textSize="35sp"
+        app:cardBackgroundColor="#1a1a1a"
+        app:cardCornerRadius="20dp"
+        android:layout_marginTop="16dp"
+        app:cardElevation="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="7dp"
+            android:scaleType="fitXY"
+            android:src="@drawable/icon_circle"
+            app:tint="#b77cfd" />
+
+        <TextView
+            android:id="@+id/tvTask_rv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="65dp"
+            android:fontFamily="serif"
+            android:padding="5dp"
+            android:text="Your Task "
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
